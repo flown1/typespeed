@@ -7,7 +7,7 @@ namespace TypeSpeed
     internal class CanvasController
     {
         private Canvas canvas;
-        private List<string> wordsDisplayed = null;
+        private List<TextBlock> wordBlocksDisplayed = null;
 
         public CanvasController(Canvas canvas) {
             this.canvas = canvas;
@@ -15,11 +15,13 @@ namespace TypeSpeed
         public void drawNewWord()
         {
             TextBlock wordToDraw = new TextBlock();
-            wordToDraw.Text = WordsDictionary.getRandomWord(); ;
+            wordToDraw.Text = WordsDictionary.getRandomWord();
             
             Canvas.SetLeft(wordToDraw, 10);
             Canvas.SetTop(wordToDraw, 10);
             canvas.Children.Add(wordToDraw);
+
+            wordBlocksDisplayed.Add(wordToDraw);
         }
         
     }
