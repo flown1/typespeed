@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TypeSpeed"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="TypeSpeed" Height="493.235" Width="1112.954"
+        ResizeMode="NoResize"
+        >
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="gameCanvas" Grid.Column="0" Height="400" Width="799" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"/>
+
+        <TextBox Grid.Column="0" Grid.Row="1" Margin="3,3.2,2.8,-28.8" />
+        <DockPanel Grid.Column="1" HorizontalAlignment="Left" Height="381" LastChildFill="False" Margin="12,10,-292.8,0" VerticalAlignment="Top" Width="284">
+            <Label x:Name="scoreLabel" Content="Score:" Height="28" VerticalAlignment="Top"/>
+            <Button x:Name="buttonStart" Content="Start" Width="75" Height="31" Click="buttonStart_Click"/>
+        </DockPanel>
+        <TextBox x:Name="logBox" Grid.Column="1" HorizontalAlignment="Left" Height="43" Margin="10,10.2,-290.4,-50.8" Grid.Row="1" TextWrapping="Wrap" Text="Start The Game! " VerticalAlignment="Top" Width="286" TextChanged="textBox_TextChanged" IsReadOnly="True"/>
     </Grid>
 </Window>

@@ -20,9 +20,23 @@ namespace TypeSpeed
     /// </summary>
     public partial class MainWindow : Window
     {
+        private CanvasController canvasController;
         public MainWindow()
         {
             InitializeComponent();
+
+            canvasController = new CanvasController(gameCanvas);
+        }
+        
+        private void buttonStart_Click(object sender, RoutedEventArgs e)
+        {
+            logBox.Text = "The Game has Started";
+            canvasController.drawNewWord();
+        }
+
+        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
         }
     }
 }
