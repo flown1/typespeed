@@ -9,7 +9,6 @@ namespace TypeSpeed
     {
         private Canvas canvas;
         private List<Word> wordsDisplayed;
-
         
         public CanvasController(Canvas canvas) {
             this.canvas = canvas;
@@ -19,8 +18,8 @@ namespace TypeSpeed
         {
             Word newWord = new Word();
             //TextBlock newWord = new TextBlock();
-            Canvas.SetLeft(newWord, 10);
-            Canvas.SetTop(newWord, 10 );
+            Canvas.SetLeft(newWord, newWord.getPosX());
+            Canvas.SetTop(newWord, newWord.getPosY());
             canvas.Children.Add(newWord);
 
             wordsDisplayed.Add(newWord);
@@ -29,7 +28,7 @@ namespace TypeSpeed
         public void moveWordsRight() {
             
             foreach (Word word in wordsDisplayed) {
-                word.setPosX(word.getPosX() + MainWindow.MOVE_RIGHT_STEP);
+                word.setPosX(word.getPosX() + Config.MOVE_RIGHT_STEP);
                 Canvas.SetLeft(word, word.getPosX());
             }
         }

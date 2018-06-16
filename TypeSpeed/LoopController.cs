@@ -8,6 +8,7 @@ namespace TypeSpeed
     public class LoopController
     {
         private CanvasController canvasController;
+        private int WORDS_ADD_INTERVAL;
 
         public LoopController(CanvasController canvasController) {
             this.canvasController = canvasController;
@@ -23,8 +24,23 @@ namespace TypeSpeed
 
         private async Task makeCanvasMoveWords()
         {
-            Console.WriteLine("Tick");
+            //Console.WriteLine("Tick");
             canvasController.moveWordsRight();
+        }
+
+        public async void addNewWordWithInitInterval(int INIT_WORD_ADDING_INTERVAL)
+        {
+            this.WORDS_ADD_INTERVAL = INIT_WORD_ADDING_INTERVAL;
+
+            while (true) {
+                await makeCanvasAddNewWord();
+                await Task.Delay(WORDS_ADD_INTERVAL);
+            }
+        }
+
+        private async Task makeCanvasAddNewWord()
+        {
+            canvasController.drawNewWord();
         }
     }
 }

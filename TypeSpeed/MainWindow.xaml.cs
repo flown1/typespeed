@@ -25,26 +25,26 @@ namespace TypeSpeed
         private CanvasController canvasController;
         private LoopController loopController;
         private CancellationToken loop_cancellation_token;
-
-        public static int LOOP_INTERVAL = 100;
-        public static int MOVE_RIGHT_STEP = 5;
+        private Config config;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            config = new Config();
+            config.setCanvasConfig(gameCanvas);
             canvasController = new CanvasController(gameCanvas);
             loopController = new LoopController(canvasController);
             loop_cancellation_token = new CancellationToken();
-
-            
         }
         
         private void buttonStart_Click(object sender, RoutedEventArgs e)
         {
+            buttonStart.IsEnabled = false; 
             updateLogBox("The Game Has Started!");
             canvasController.drawNewWord();
-            loopController.startLoop(LOOP_INTERVAL, loop_cancellation_token);
+            loopController.startLoop(Config.LOOP_INTERVAL, loop_cancellation_token);
+            loopController.addNewWordWithInitInterval(Config.INIT_WORD_ADDING_INTERVAL);
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)

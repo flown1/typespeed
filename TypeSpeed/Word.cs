@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace TypeSpeed
@@ -10,8 +11,10 @@ namespace TypeSpeed
 
         public Word(): base() {
 
-            this.posX = 10;
-            this.posY = 10;
+            Random random = new Random();
+            
+            this.posX = 0;
+            this.posY = random.Next(0, 400/*Convert.ToInt32(MainWindow.config.getCanvasHeight()*/);
             this.color = new Color();
 
             base.Text = WordsDictionary.getRandomWord();
