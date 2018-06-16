@@ -12,9 +12,10 @@ namespace TypeSpeed
         public double CANVAS_WIDTH;
         public double CANVAS_HEIGHT;
         
-        public static int LOOP_INTERVAL = 100;
-        public static int MOVE_RIGHT_STEP = 5;
+        public static int LOOP_INTERVAL = 50;
+        public static int MOVE_RIGHT_STEP = 1;
 
+        public static int INIT_LIVES = 10;
 
         public static int INIT_WORD_ADDING_INTERVAL = 2000;
 

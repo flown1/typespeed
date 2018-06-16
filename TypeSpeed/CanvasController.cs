@@ -9,10 +9,12 @@ namespace TypeSpeed
     {
         private Canvas canvas;
         private List<Word> wordsDisplayed;
+        private PlayerInfo playerInfo;
         
-        public CanvasController(Canvas canvas) {
+        public CanvasController(Canvas canvas, PlayerInfo playerInfo) {
             this.canvas = canvas;
             wordsDisplayed = new List<Word>();
+            this.playerInfo = playerInfo;
         }
         public void drawNewWord()
         {
@@ -26,11 +28,22 @@ namespace TypeSpeed
         }
         
         public void moveWordsRight() {
-            
             foreach (Word word in wordsDisplayed) {
-                word.setPosX(word.getPosX() + Config.MOVE_RIGHT_STEP);
-                Canvas.SetLeft(word, word.getPosX());
+                if (word.getPosX() < 800)
+                {
+                    word.setPosX(word.getPosX() + Config.MOVE_RIGHT_STEP);
+                    Canvas.SetLeft(word, word.getPosX());
+                }
+                else {
+                    wordMadeItToTheEnd(word);
+                }
             }
+        }
+
+        private void wordMadeItToTheEnd(Word word)
+        {
+            deleteWord(word);
+            playerInfo.looseLife(1);
         }
 
         public void checkIfHit(string text)
@@ -41,15 +54,30 @@ namespace TypeSpeed
                     wordsToDelete.Add(word);
                 }
             }
-            deleteWords(wordsToDelete);
+            if (wordsToDelete.Count > 0)
+            {
+                deleteWords(wordsToDelete);
+            }
         }
 
         private void deleteWords(List<Word> wordsToDelete)
         {
-            foreach (Word word in wordsToDelete) {
-                canvas.Children.Remove(word);
-                wordsToDelete.Remove(word);
+            try
+            {
+                foreach (Word word in wordsToDelete)
+                {
+                    deleteWord(word);
+                }
             }
+            catch (Exception e) {
+                Console.WriteLine("ERROR! " + e.Message);
+            }
+        }
+
+        private void deleteWord(Word word)
+        {
+            canvas.Children.Remove(word);
+            wordsDisplayed.Remove(word);
         }
     }
 }

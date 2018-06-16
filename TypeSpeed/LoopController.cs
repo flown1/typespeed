@@ -42,5 +42,25 @@ namespace TypeSpeed
         {
             canvasController.drawNewWord();
         }
+        
+        public async Task scoreAndLivesUpdater(int TIME_INTERVAL, MainWindow mainWindow, PlayerInfo playerInfo)
+        {
+            while (true){
+                await updateScore(mainWindow, playerInfo);
+                await updateLives(mainWindow, playerInfo);
+
+                await Task.Delay(TIME_INTERVAL);
+            }
+        }
+
+        private async Task updateLives(MainWindow mainWindow, PlayerInfo playerInfo)
+        {
+            mainWindow.lives.Text = playerInfo.getLives().ToString();
+        }
+
+        private async Task updateScore(MainWindow mainWindow, PlayerInfo playerInfo)
+        {
+            mainWindow.score.Text = playerInfo.getScore().ToString();
+        }
     }
 }

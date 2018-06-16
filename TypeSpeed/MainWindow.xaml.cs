@@ -26,24 +26,36 @@ namespace TypeSpeed
         private LoopController loopController;
         private CancellationToken loop_cancellation_token;
         private Config config;
-
+        private PlayerInfo playerInfo;
+        
         public MainWindow()
         {
             InitializeComponent();
 
             config = new Config();
             config.setCanvasConfig(gameCanvas);
-            canvasController = new CanvasController(gameCanvas);
+            playerInfo = new PlayerInfo(Config.INIT_LIVES);
+            canvasController = new CanvasController(gameCanvas, playerInfo);
             loopController = new LoopController(canvasController);
             loop_cancellation_token = new CancellationToken();
         }
         
         private void buttonStart_Click(object sender, RoutedEventArgs e)
         {
-            buttonStart.IsEnabled = false; 
+            buttonStart.IsEnabled = false;
+            typeInput.Focus();
+
+            startTheGame();
+        }
+
+        private void startTheGame()
+        {
             updateLogBox("The Game Has Started!");
-            canvasController.drawNewWord();
+            lives.Text = playerInfo.getLives().ToString();
+            score.Text = playerInfo.getScore().ToString();
+            
             loopController.startLoop(Config.LOOP_INTERVAL, loop_cancellation_token);
+            loopController.scoreAndLivesUpdater(Config.LOOP_INTERVAL ,this, playerInfo);
             loopController.addNewWordWithInitInterval(Config.INIT_WORD_ADDING_INTERVAL);
         }
 
@@ -61,12 +73,11 @@ namespace TypeSpeed
         }
         private void typeInput_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            Console.WriteLine("costam pressed");
 
             if (e.Key == Key.Enter)
             {
-                Console.WriteLine("Enter pressed");
                 typeInput_enterHandler(typeInput.Text);
+                typeInput.Text = "";
             }
         }
 
