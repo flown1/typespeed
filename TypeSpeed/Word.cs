@@ -6,7 +6,8 @@ namespace TypeSpeed
 {
     public class Word : TextBlock
     {
-        private int posX, posY;
+        private int posX, posY, width, height;
+        
         
 
         public Word(): base() {
@@ -14,10 +15,10 @@ namespace TypeSpeed
             
             this.posX = 0;
             this.posY = random.Next(0, 400/*Convert.ToInt32(MainWindow.config.getCanvasHeight()*/);
-
-
+            
             base.Foreground = ColorPalette.GREEN;
             base.Text = WordsDictionary.getRandomWord();
+            
         }
 
         public int getPosX() { return posX; }

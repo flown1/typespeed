@@ -21,6 +21,7 @@ namespace TypeSpeed
             Word newWord = new Word();
             //TextBlock newWord = new TextBlock();
             Canvas.SetLeft(newWord, newWord.getPosX());
+            Console.WriteLine(newWord.Height);
             Canvas.SetTop(newWord, newWord.getPosY());
             canvas.Children.Add(newWord);
 
@@ -29,6 +30,8 @@ namespace TypeSpeed
         
         public void moveWordsRight() {
             foreach (Word word in wordsDisplayed) {
+
+                Console.WriteLine(word.Width);
                 if (word.getPosX() < 800)
                 {
                     word.setPosX(word.getPosX() + Config.MOVE_RIGHT_STEP);
@@ -61,11 +64,15 @@ namespace TypeSpeed
             foreach (Word word in wordsDisplayed) {
                 if (word.Text.Equals(text)) {
                     wordsToDelete.Add(word);
+                    playerInfo.addPoints(1);
                 }
             }
             if (wordsToDelete.Count > 0)
             {
                 deleteWords(wordsToDelete);
+            }
+            else {
+                playerInfo.loosePoints(1);
             }
         }
 

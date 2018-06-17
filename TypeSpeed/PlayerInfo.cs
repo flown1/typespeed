@@ -25,5 +25,9 @@ namespace TypeSpeed
         public void addPoints(int points) {
             score += points;
         }
+        public void loosePoints(int points) {
+            score -= points;
+
+        }
     }
 }
