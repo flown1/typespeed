@@ -19,7 +19,7 @@ namespace TypeSpeed
         public static int INIT_LIVES = 10;
 
         public static int INIT_WORD_ADDING_INTERVAL = 2000;
-        public static double WORDS_ADDING_INTERVAL_DECREMENTATION_MULTIPLAIER = 0.01;
+        public static double WORDS_ADDING_INTERVAL_DECREMENTATION_MULTIPLAIER = 0.04;
         public int currentWordsAddingInterval = INIT_WORD_ADDING_INTERVAL;
 
         public static int INIT_MOVE_TIME_INTERVAL = 50;

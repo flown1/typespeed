@@ -33,8 +33,6 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0" x:Name="scoreLabel" Content="Score:" Height="44" VerticalAlignment="Top" FontSize="22" Width="76"/>
             <TextBlock Grid.Column="1" Grid.Row="0" x:Name="score" Text="0" Height="44" VerticalAlignment="Top" FontSize="22" Width="76"/>
-            <Label Grid.Column="2" Grid.Row="0" x:Name="livesLabel" Content="Lives:" Height="44" VerticalAlignment="Top" FontSize="22" Width="76"/>
-            <TextBlock Grid.Column="3" Grid.Row="0" x:Name="lives" Text="0" Height="44" VerticalAlignment="Top" FontSize="22" Width="76"/>
             <Button Grid.Column="0" Grid.Row="1" x:Name="buttonStart" Content="Start" Width="76" Click="buttonStart_Click" Margin="0,167,0,174.8"/>
         </Grid>
         <TextBox x:Name="logBox" Grid.Column="1" HorizontalAlignment="Left" Height="79"  Grid.Row="1" TextWrapping="Wrap" Text="Start The Game! " VerticalAlignment="Top" Width="296" TextChanged="textBox_TextChanged" IsReadOnly="True" FontSize="14" Margin="0,0.2,-8.8,-34.4" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>

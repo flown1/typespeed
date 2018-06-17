@@ -51,11 +51,10 @@ namespace TypeSpeed
         private void startTheGame()
         {
             updateLogBox("The Game Has Started!");
-            lives.Text = playerInfo.getLives().ToString();
             score.Text = playerInfo.getScore().ToString();
             
             loopController.startLoop(config, loop_cancellation_token);
-            loopController.scoreAndLivesUpdater(config ,this, playerInfo);
+            loopController.scoreUpdater(config ,this, playerInfo);
             loopController.addNewWordWithInitInterval(config);
         }
 
