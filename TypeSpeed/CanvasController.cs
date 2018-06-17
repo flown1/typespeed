@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace TypeSpeed
@@ -11,19 +12,20 @@ namespace TypeSpeed
         private List<Word> wordsDisplayed;
         private PlayerInfo playerInfo;
         private Config config;
+        private MainWindow handlerToMainWindow;
 
-        public CanvasController(Canvas canvas, PlayerInfo playerInfo, Config config) {
+        public CanvasController(MainWindow window, Canvas canvas, PlayerInfo playerInfo, Config config) {
             this.canvas = canvas;
             wordsDisplayed = new List<Word>();
             this.playerInfo = playerInfo;
             this.config = config;
+            this.handlerToMainWindow = window;
         }
         public void drawNewWord()
         {
             Word newWord = new Word();
             //TextBlock newWord = new TextBlock();
             Canvas.SetLeft(newWord, newWord.getPosX());
-            Console.WriteLine(newWord.Height);
             Canvas.SetTop(newWord, newWord.getPosY());
             canvas.Children.Add(newWord);
 
@@ -56,8 +58,8 @@ namespace TypeSpeed
         private void wordMadeItToTheEnd(Word word)
         {
             deleteWord(word);
-            playerInfo.looseLife(1);
             config.GAME_ON = false;
+            handlerToMainWindow.buttonRestart.IsEnabled = true;
         }
 
         public void checkIfHit(string text)
@@ -83,6 +85,17 @@ namespace TypeSpeed
         {
             config.setCurrentWordsAddingInterval(config.currentWordsAddingInterval - (int)(config.currentWordsAddingInterval * Config.WORDS_ADDING_INTERVAL_DECREMENTATION_MULTIPLAIER));
             config.setCurrentMoveTimeInterval(config.currentWordsMoveInterval - (int)(config.currentWordsMoveInterval * Config.WORDS_MOVING_INTERVAL_DECREMENTATION_MULTIPLAIER));
+        }
+
+        public void clearEverything()
+        {
+            foreach(Word word in wordsDisplayed) {
+                canvas.Children.Remove(word);
+            }
+            wordsDisplayed.Clear();
+            config.currentWordsAddingInterval = Config.INIT_WORD_ADDING_INTERVAL;
+            config.currentWordsMoveInterval = Config.INIT_MOVE_TIME_INTERVAL;
+            playerInfo.loosePoints(playerInfo.getScore());
         }
 
         private void deleteWords(List<Word> wordsToDelete)

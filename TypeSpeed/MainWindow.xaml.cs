@@ -24,22 +24,20 @@ namespace TypeSpeed
     {
         private CanvasController canvasController;
         private LoopController loopController;
-        private CancellationToken loop_cancellation_token;
         private Config config;
         private PlayerInfo playerInfo;
-        
+
         public MainWindow()
         {
             InitializeComponent();
 
             config = new Config();
             config.setCanvasConfig(gameCanvas);
-            playerInfo = new PlayerInfo(Config.INIT_LIVES);
-            canvasController = new CanvasController(gameCanvas, playerInfo, config);
+            playerInfo = new PlayerInfo();
+            canvasController = new CanvasController(this, gameCanvas, playerInfo, config);
             loopController = new LoopController(canvasController);
-            loop_cancellation_token = new CancellationToken();
         }
-        
+
         private void buttonStart_Click(object sender, RoutedEventArgs e)
         {
             buttonStart.IsEnabled = false;
@@ -51,15 +49,15 @@ namespace TypeSpeed
         private void startTheGame()
         {
             score.Text = playerInfo.getScore().ToString();
-            
-            loopController.wordsMovementLoop(config, loop_cancellation_token);
-            loopController.scoreUpdater(config ,this, playerInfo);
+
+            loopController.startLoop(config);
+            loopController.scoreUpdater(config, this, playerInfo);
             loopController.addNewWordLoop(config);
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+
         }
 
         private void typeInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -84,9 +82,10 @@ namespace TypeSpeed
         private void buttonRestart_Click(object sender, RoutedEventArgs e)
         {
             clearGame();
-
-            buttonStart.IsEnabled = false;
+            
+            buttonRestart.IsEnabled = false;
             typeInput.Focus();
+            typeInput.Text = "";
 
             startTheGame();
         }
@@ -95,10 +94,9 @@ namespace TypeSpeed
         {
             config = new Config();
             config.setCanvasConfig(gameCanvas);
-            playerInfo = new PlayerInfo(Config.INIT_LIVES);
-            canvasController = new CanvasController(gameCanvas, playerInfo, config);
-            loopController = new LoopController(canvasController);
-            loop_cancellation_token = new CancellationToken();
+            
+            canvasController.clearEverything();
+            
         }
     }
 }

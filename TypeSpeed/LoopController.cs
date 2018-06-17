@@ -13,18 +13,17 @@ namespace TypeSpeed
         public LoopController(CanvasController canvasController) {
             this.canvasController = canvasController;
         }
-        public async Task wordsMovementLoop(Config config, CancellationToken cancellationToken)
+        public async Task startLoop(Config config)
         {
-            while (true)
+            while (true && config.GAME_ON)
             {
                 await makeCanvasMoveWords();
-                await Task.Delay(config.currentWordsMoveInterval, cancellationToken);
+                await Task.Delay(config.currentWordsMoveInterval);
             };
         }
 
         private async Task makeCanvasMoveWords()
         {
-            //Console.WriteLine("Tick");
             canvasController.moveWordsRight();
         }
 
@@ -45,7 +44,6 @@ namespace TypeSpeed
         {
             while (true){
                 await updateScore(mainWindow, playerInfo);
-
                 await Task.Delay(Config.REFRESHING_SCORE_TIME_INTERVAL);
             }
         }
