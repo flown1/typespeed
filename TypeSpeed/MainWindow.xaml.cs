@@ -52,9 +52,9 @@ namespace TypeSpeed
         {
             score.Text = playerInfo.getScore().ToString();
             
-            loopController.startLoop(config, loop_cancellation_token);
+            loopController.wordsMovementLoop(config, loop_cancellation_token);
             loopController.scoreUpdater(config ,this, playerInfo);
-            loopController.addNewWordWithInitInterval(config);
+            loopController.addNewWordLoop(config);
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -83,7 +83,22 @@ namespace TypeSpeed
 
         private void buttonRestart_Click(object sender, RoutedEventArgs e)
         {
+            clearGame();
 
+            buttonStart.IsEnabled = false;
+            typeInput.Focus();
+
+            startTheGame();
+        }
+
+        private void clearGame()
+        {
+            config = new Config();
+            config.setCanvasConfig(gameCanvas);
+            playerInfo = new PlayerInfo(Config.INIT_LIVES);
+            canvasController = new CanvasController(gameCanvas, playerInfo, config);
+            loopController = new LoopController(canvasController);
+            loop_cancellation_token = new CancellationToken();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace TypeSpeed
         public LoopController(CanvasController canvasController) {
             this.canvasController = canvasController;
         }
-        public async Task startLoop(Config config, CancellationToken cancellationToken)
+        public async Task wordsMovementLoop(Config config, CancellationToken cancellationToken)
         {
             while (true)
             {
@@ -28,9 +28,9 @@ namespace TypeSpeed
             canvasController.moveWordsRight();
         }
 
-        public async void addNewWordWithInitInterval(Config config)
+        public async void addNewWordLoop(Config config)
         {
-            while (true) {
+            while (true && config.GAME_ON) {
                 await makeCanvasAddNewWord();
                 await Task.Delay(config.currentWordsAddingInterval);
             }

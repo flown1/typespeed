@@ -57,6 +57,7 @@ namespace TypeSpeed
         {
             deleteWord(word);
             playerInfo.looseLife(1);
+            config.GAME_ON = false;
         }
 
         public void checkIfHit(string text)

@@ -30,8 +30,10 @@ namespace TypeSpeed
         public static double WORDS_MOVING_INTERVAL_DECREMENTATION_MULTIPLAIER = 0.2;
         public static int MIN_FONT_SIZE = 14;
         public static int MAX_FONT_SIZE = 19;
+        public bool GAME_ON;
 
         public Config() {
+            GAME_ON = true;
         }
         public void setCanvasConfig(Canvas canvas)
         {
