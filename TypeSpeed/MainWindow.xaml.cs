@@ -50,7 +50,6 @@ namespace TypeSpeed
 
         private void startTheGame()
         {
-            updateLogBox("The Game Has Started!");
             score.Text = playerInfo.getScore().ToString();
             
             loopController.startLoop(config, loop_cancellation_token);
@@ -61,9 +60,6 @@ namespace TypeSpeed
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             
-        }
-        public void updateLogBox(string message) {
-            logBox.Text = message;
         }
 
         private void typeInput_TextChanged(object sender, TextChangedEventArgs e)
@@ -83,6 +79,11 @@ namespace TypeSpeed
         private void typeInput_enterHandler(string text)
         {
             canvasController.checkIfHit(text);
+        }
+
+        private void buttonRestart_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
