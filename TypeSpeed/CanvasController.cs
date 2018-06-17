@@ -33,7 +33,6 @@ namespace TypeSpeed
         public void moveWordsRight() {
             foreach (Word word in wordsDisplayed) {
 
-                Console.WriteLine(word.Width);
                 if (word.getPosX() < 800)
                 {
                     word.setPosX(word.getPosX() + Config.MOVE_RIGHT_STEP);

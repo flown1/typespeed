@@ -18,7 +18,7 @@ namespace TypeSpeed
             
             base.Foreground = ColorPalette.GREEN;
             base.Text = WordsDictionary.getRandomWord();
-            
+            base.FontSize = random.Next(Config.MIN_FONT_SIZE, Config.MAX_FONT_SIZE);
         }
 
         public int getPosX() { return posX; }
