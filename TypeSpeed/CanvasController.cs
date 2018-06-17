@@ -10,11 +10,13 @@ namespace TypeSpeed
         private Canvas canvas;
         private List<Word> wordsDisplayed;
         private PlayerInfo playerInfo;
-        
-        public CanvasController(Canvas canvas, PlayerInfo playerInfo) {
+        private Config config;
+
+        public CanvasController(Canvas canvas, PlayerInfo playerInfo, Config config) {
             this.canvas = canvas;
             wordsDisplayed = new List<Word>();
             this.playerInfo = playerInfo;
+            this.config = config;
         }
         public void drawNewWord()
         {
@@ -70,10 +72,17 @@ namespace TypeSpeed
             if (wordsToDelete.Count > 0)
             {
                 deleteWords(wordsToDelete);
+                makeGameHarder();
             }
             else {
                 playerInfo.loosePoints(1);
             }
+        }
+
+        private void makeGameHarder()
+        {
+            config.setCurrentWordsAddingInterval(config.currentWordsAddingInterval - (int)(config.currentWordsAddingInterval * Config.WORDS_ADDING_INTERVAL_DECREMENTATION_MULTIPLAIER));
+            config.setCurrentMoveTimeInterval(config.currentWordsMoveInterval - (int)(config.currentWordsMoveInterval * Config.WORDS_MOVING_INTERVAL_DECREMENTATION_MULTIPLAIER));
         }
 
         private void deleteWords(List<Word> wordsToDelete)

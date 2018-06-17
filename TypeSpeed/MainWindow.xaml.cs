@@ -35,7 +35,7 @@ namespace TypeSpeed
             config = new Config();
             config.setCanvasConfig(gameCanvas);
             playerInfo = new PlayerInfo(Config.INIT_LIVES);
-            canvasController = new CanvasController(gameCanvas, playerInfo);
+            canvasController = new CanvasController(gameCanvas, playerInfo, config);
             loopController = new LoopController(canvasController);
             loop_cancellation_token = new CancellationToken();
         }
@@ -54,9 +54,9 @@ namespace TypeSpeed
             lives.Text = playerInfo.getLives().ToString();
             score.Text = playerInfo.getScore().ToString();
             
-            loopController.startLoop(Config.LOOP_INTERVAL, loop_cancellation_token);
-            loopController.scoreAndLivesUpdater(Config.LOOP_INTERVAL ,this, playerInfo);
-            loopController.addNewWordWithInitInterval(Config.INIT_WORD_ADDING_INTERVAL);
+            loopController.startLoop(config, loop_cancellation_token);
+            loopController.scoreAndLivesUpdater(config ,this, playerInfo);
+            loopController.addNewWordWithInitInterval(config);
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
