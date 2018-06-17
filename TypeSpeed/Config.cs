@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace TypeSpeed
 {
@@ -11,14 +12,14 @@ namespace TypeSpeed
     {
         public double CANVAS_WIDTH;
         public double CANVAS_HEIGHT;
-        
+
         public static int LOOP_INTERVAL = 50;
         public static int MOVE_RIGHT_STEP = 1;
 
         public static int INIT_LIVES = 10;
 
         public static int INIT_WORD_ADDING_INTERVAL = 2000;
-
+        
         public Config() {
         }
         public void setCanvasConfig(Canvas canvas)

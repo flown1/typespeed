@@ -7,16 +7,16 @@ namespace TypeSpeed
     public class Word : TextBlock
     {
         private int posX, posY;
-        private Color color;
+        
 
         public Word(): base() {
-
             Random random = new Random();
             
             this.posX = 0;
             this.posY = random.Next(0, 400/*Convert.ToInt32(MainWindow.config.getCanvasHeight()*/);
-            this.color = new Color();
 
+
+            base.Foreground = ColorPalette.GREEN;
             base.Text = WordsDictionary.getRandomWord();
         }
 
@@ -25,6 +25,10 @@ namespace TypeSpeed
         public int getPosY() { return posY; }
         public void setPosY(int newPosY) { this.posY = newPosY; }
 
+        public void setForeground(SolidColorBrush color) {
+            base.Foreground = color;
+        }
+        
 
     }
 }

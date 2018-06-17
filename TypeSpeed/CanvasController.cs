@@ -33,8 +33,17 @@ namespace TypeSpeed
                 {
                     word.setPosX(word.getPosX() + Config.MOVE_RIGHT_STEP);
                     Canvas.SetLeft(word, word.getPosX());
+
+                    if (word.getPosX() == 600)
+                    {
+                        word.setForeground(ColorPalette.RED);
+                    }
+                    else if (word.getPosX() == 450) {
+                        word.setForeground(ColorPalette.YELLOW);
+                    }
                 }
-                else {
+                else
+                {
                     wordMadeItToTheEnd(word);
                 }
             }
