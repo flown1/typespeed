@@ -6,7 +6,7 @@ namespace TypeSpeed
 {
     public class Word : TextBlock
     {
-        private int posX, posY, width, height;
+        private int posX, posY;
         
         
 
