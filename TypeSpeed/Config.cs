@@ -10,9 +10,6 @@ namespace TypeSpeed
 {
     public class Config
     {
-        public double CANVAS_WIDTH;
-        public double CANVAS_HEIGHT;
-
         public static int LOOP_INTERVAL = 50;
         public static int MOVE_RIGHT_STEP = 1;
 
@@ -34,19 +31,6 @@ namespace TypeSpeed
 
         public Config() {
             GAME_ON = true;
-        }
-        public void setCanvasConfig(Canvas canvas)
-        {
-            this.CANVAS_WIDTH = canvas.ActualWidth;
-            this.CANVAS_HEIGHT = canvas.ActualHeight;
-        }
-        public double getCanvasHeight()
-        {
-            return CANVAS_HEIGHT;
-        }
-        public double getCanvasWidth()
-        {
-            return CANVAS_WIDTH;
         }
         public void setCurrentWordsAddingInterval(int val) {
             this.currentWordsAddingInterval = val;
