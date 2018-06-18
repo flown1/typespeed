@@ -40,7 +40,6 @@ namespace TypeSpeed
         private void initializeGameObjects()
         {
             config = new Config();
-            config.setCanvasConfig(gameCanvas);
             playerInfo = new PlayerInfo();
             canvasController = new CanvasController(this, gameCanvas, playerInfo, config);
 
