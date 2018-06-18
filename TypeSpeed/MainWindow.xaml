@@ -17,7 +17,14 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="gameCanvas" Grid.Column="0" Height="400" Width="799" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}"/>
+        <Canvas x:Name="gameCanvas" Grid.Column="0" Height="400" Width="799" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
+            <Rectangle
+                Width="100"
+                Height="400"
+                Fill="red"
+                Opacity="0.5"
+                Canvas.Right="0"/>  
+        </Canvas>
 
         <TextBox x:Name="typeInput" Grid.Column="0" Grid.Row="1" Margin="3,3.2,2.8,-28.8" AutomationProperties.HelpText="Type here..." TextChanged="typeInput_TextChanged"  KeyDown="typeInput_KeyDown" FontSize="36" />
         <Grid Grid.Column="1" Margin="10,10,-64.8,4.8" Width="300">

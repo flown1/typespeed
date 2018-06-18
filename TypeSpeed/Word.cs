@@ -13,8 +13,8 @@ namespace TypeSpeed
         public Word(): base() {
             Random random = new Random();
             
-            this.posX = 0;
-            this.posY = random.Next(0, 400/*Convert.ToInt32(MainWindow.config.getCanvasHeight()*/);
+            this.posX = -30;
+            this.posY = random.Next(0, 390/*Convert.ToInt32(MainWindow.config.getCanvasHeight()*/);
             
             base.Foreground = ColorPalette.GREEN;
             base.Text = WordsDictionary.getRandomWord();

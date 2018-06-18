@@ -39,16 +39,16 @@ namespace TypeSpeed
         public void moveWordsRight() {
             foreach (Word word in wordsDisplayed) {
 
-                if (word.getPosX() < 800)
+                if (word.getPosX() < 700)
                 {
                     word.setPosX(word.getPosX() + Config.MOVE_RIGHT_STEP);
                     Canvas.SetLeft(word, word.getPosX());
 
-                    if (word.getPosX() == 600)
+                    if (word.getPosX() == 550)
                     {
                         word.setForeground(ColorPalette.RED);
                     }
-                    else if (word.getPosX() == 450) {
+                    else if (word.getPosX() == 400) {
                         word.setForeground(ColorPalette.YELLOW);
                     }
                 }
@@ -68,8 +68,6 @@ namespace TypeSpeed
 
         private void wordMadeItToTheEnd(Word word)
         {
-
-
             deleteWord(word);
             config.GAME_ON = false;
             handlerToMainWindow.buttonRestart.IsEnabled = true;
