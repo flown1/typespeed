@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,9 @@ namespace TypeSpeed
         private PlayerInfo playerInfo;
         private Config config;
         private MainWindow handlerToMainWindow;
+        private CancellationTokenSource startLoopCancellationToken;
+        private CancellationTokenSource scoreUpdaterCancellationToken;
+        private CancellationTokenSource addNewWordCancellationToken;
 
         public CanvasController(MainWindow window, Canvas canvas, PlayerInfo playerInfo, Config config) {
             this.canvas = canvas;
@@ -55,11 +59,24 @@ namespace TypeSpeed
             }
         }
 
+        public void bindCancellationTokens(CancellationTokenSource startLoopCancellationToken, CancellationTokenSource scoreUpdaterCancellationToken, CancellationTokenSource addNewWordCancellationToken)
+        {
+            this.startLoopCancellationToken = startLoopCancellationToken;
+            this.scoreUpdaterCancellationToken = scoreUpdaterCancellationToken;
+            this.addNewWordCancellationToken = addNewWordCancellationToken;
+        }
+
         private void wordMadeItToTheEnd(Word word)
         {
+
+
             deleteWord(word);
             config.GAME_ON = false;
             handlerToMainWindow.buttonRestart.IsEnabled = true;
+            
+            scoreUpdaterCancellationToken.Cancel();
+            startLoopCancellationToken.Cancel();
+            addNewWordCancellationToken.Cancel();
         }
 
         public void checkIfHit(string text)
@@ -89,7 +106,8 @@ namespace TypeSpeed
 
         public void clearEverything()
         {
-            foreach(Word word in wordsDisplayed) {
+
+            foreach (Word word in wordsDisplayed) {
                 canvas.Children.Remove(word);
             }
             wordsDisplayed.Clear();

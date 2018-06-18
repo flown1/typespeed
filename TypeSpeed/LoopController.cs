@@ -13,10 +13,11 @@ namespace TypeSpeed
         public LoopController(CanvasController canvasController) {
             this.canvasController = canvasController;
         }
-        public async Task startLoop(Config config)
+        public async Task startLoop(Config config, CancellationToken cancellationToken)
         {
-            while (true && config.GAME_ON)
+            while (true)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 await makeCanvasMoveWords();
                 await Task.Delay(config.currentWordsMoveInterval);
             };
@@ -27,9 +28,10 @@ namespace TypeSpeed
             canvasController.moveWordsRight();
         }
 
-        public async void addNewWordLoop(Config config)
+        public async Task addNewWordLoop(Config config, CancellationToken cancellationToken)
         {
-            while (true && config.GAME_ON) {
+            while (true) {
+                cancellationToken.ThrowIfCancellationRequested();
                 await makeCanvasAddNewWord();
                 await Task.Delay(config.currentWordsAddingInterval);
             }
@@ -40,9 +42,10 @@ namespace TypeSpeed
             canvasController.drawNewWord();
         }
         
-        public async Task scoreUpdater(Config config, MainWindow mainWindow, PlayerInfo playerInfo)
+        public async Task scoreUpdater(Config config, MainWindow mainWindow, PlayerInfo playerInfo, CancellationToken cancellationToken)
         {
             while (true){
+                cancellationToken.ThrowIfCancellationRequested();
                 await updateScore(mainWindow, playerInfo);
                 await Task.Delay(Config.REFRESHING_SCORE_TIME_INTERVAL);
             }

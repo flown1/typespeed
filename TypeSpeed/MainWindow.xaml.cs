@@ -26,16 +26,30 @@ namespace TypeSpeed
         private LoopController loopController;
         private Config config;
         private PlayerInfo playerInfo;
+        private CancellationTokenSource startLoopCancellationToken;
+        private CancellationTokenSource scoreUpdaterCancellationToken;
+        private CancellationTokenSource addNewWordCancellationToken;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            initializeGameObjects();
+        }
+
+        private void initializeGameObjects()
+        {
             config = new Config();
             config.setCanvasConfig(gameCanvas);
             playerInfo = new PlayerInfo();
             canvasController = new CanvasController(this, gameCanvas, playerInfo, config);
+
             loopController = new LoopController(canvasController);
+            startLoopCancellationToken = new CancellationTokenSource();
+            scoreUpdaterCancellationToken = new CancellationTokenSource();
+            addNewWordCancellationToken = new CancellationTokenSource();
+            canvasController.bindCancellationTokens(startLoopCancellationToken, scoreUpdaterCancellationToken, addNewWordCancellationToken);
+
         }
 
         private void buttonStart_Click(object sender, RoutedEventArgs e)
@@ -49,10 +63,15 @@ namespace TypeSpeed
         private void startTheGame()
         {
             score.Text = playerInfo.getScore().ToString();
-
-            loopController.startLoop(config);
-            loopController.scoreUpdater(config, this, playerInfo);
-            loopController.addNewWordLoop(config);
+            try
+            {
+                loopController.startLoop(config, startLoopCancellationToken.Token);
+                loopController.scoreUpdater(config, this, playerInfo, scoreUpdaterCancellationToken.Token);
+                loopController.addNewWordLoop(config, addNewWordCancellationToken.Token);
+            }
+            catch (Exception e) {
+                Console.WriteLine("There is something wrong with game loops work! Game stops");
+            }
         }
 
         private void textBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -92,11 +111,9 @@ namespace TypeSpeed
 
         private void clearGame()
         {
-            config = new Config();
-            config.setCanvasConfig(gameCanvas);
-            
             canvasController.clearEverything();
             
+            initializeGameObjects();
         }
     }
 }
