@@ -8,8 +8,6 @@ namespace TypeSpeed
     {
         private int posX, posY;
         
-        
-
         public Word(): base() {
             Random random = new Random();
             

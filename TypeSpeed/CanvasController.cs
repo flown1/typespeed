@@ -68,7 +68,6 @@ namespace TypeSpeed
 
         private void wordMadeItToTheEnd(Word word)
         {
-            deleteWord(word);
             config.GAME_ON = false;
             handlerToMainWindow.buttonRestart.IsEnabled = true;
             
