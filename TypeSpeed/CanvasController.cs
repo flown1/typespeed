@@ -70,7 +70,8 @@ namespace TypeSpeed
         {
             config.GAME_ON = false;
             handlerToMainWindow.buttonRestart.IsEnabled = true;
-            
+            handlerToMainWindow.typeInput.IsEnabled = false;
+
             scoreUpdaterCancellationToken.Cancel();
             startLoopCancellationToken.Cancel();
             addNewWordCancellationToken.Cancel();

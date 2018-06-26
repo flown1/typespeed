@@ -53,14 +53,15 @@ namespace TypeSpeed
 
         private void buttonStart_Click(object sender, RoutedEventArgs e)
         {
-            buttonStart.IsEnabled = false;
-            typeInput.Focus();
-
             startTheGame();
         }
 
         private void startTheGame()
         {
+            buttonStart.IsEnabled = false;
+            typeInput.IsEnabled = true;
+
+            typeInput.Focus();
             score.Text = playerInfo.getScore().ToString();
             try
             {
@@ -94,7 +95,8 @@ namespace TypeSpeed
 
         private void typeInput_enterHandler(string text)
         {
-            canvasController.checkIfHit(text);
+            if(!text.Equals(""))
+                canvasController.checkIfHit(text);
         }
 
         private void buttonRestart_Click(object sender, RoutedEventArgs e)
@@ -102,6 +104,7 @@ namespace TypeSpeed
             clearGame();
             
             buttonRestart.IsEnabled = false;
+            typeInput.IsEnabled = true;
             typeInput.Focus();
             typeInput.Text = "";
 
